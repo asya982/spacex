@@ -5,7 +5,7 @@ import "swiper/css";
 import "./Caroulsel.css";
 import Loader from "../Loader";
 import { Navigation } from "swiper/modules";
-import Button, { ButtonStyled } from "../Button";
+import { ButtonStyled } from "../Button";
 
 type CarouselProps = {
   items: React.ReactNode[];

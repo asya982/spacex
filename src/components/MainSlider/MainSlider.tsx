@@ -1,4 +1,4 @@
-import { FC, Ref } from "react";
+import { FC, RefObject } from "react";
 import { images } from "../../helpers/images";
 import Slider from "../../UI/Slider";
 import "./slider.css";
@@ -6,7 +6,7 @@ import { Icons } from "../../UI/Icons";
 import styled from "styled-components";
 
 type MainSliderProps = {
-  tours: Ref<React.MutableRefObject<null>>;
+  tours: RefObject<HTMLElement>;
 };
 
 const TextArea = styled.section`
@@ -31,6 +31,12 @@ const Controls = styled.aside`
 `;
 
 const MainSlider: FC<MainSliderProps> = ({ tours }) => {
+  const scrollToTours = () => {
+    window.scrollTo({
+      top: tours?.current?.offsetTop,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <Slider>
@@ -46,14 +52,7 @@ const MainSlider: FC<MainSliderProps> = ({ tours }) => {
           </div>
         ))}
       </Slider>
-      <Controls
-        onClick={() =>
-          window.scrollTo({
-            top: tours?.current?.offsetTop,
-            behavior: "smooth",
-          })
-        }
-      >
+      <Controls onClick={scrollToTours}>
         <p>Explore tours</p>
         <Icons.arrow />
       </Controls>
