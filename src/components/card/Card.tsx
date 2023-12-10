@@ -1,7 +1,5 @@
 import { FC } from "react";
 import styled from "styled-components";
-import Button from "../../UI/Button";
-import { Icons } from "../../UI/Icons";
 import CardControls from "./Card-controls";
 
 type CardProps = {
@@ -30,12 +28,17 @@ const Description = styled.div`
   flex-direction: column;
   gap: 15px;
   text-align: center;
+  padding: 24px 32px;
+
+    h2 {
+        height: 80px;
+    }
+
   p {
     color: #556b84;
-    font-size: x-small;
-    height: 80px;
+    font-size: small;
+    height: 150px;
   }
-  padding: 24px 32px;
 `;
 
 const Card: FC<CardProps> = ({ description, id, image, name, inFavs }) => {
@@ -45,7 +48,7 @@ const Card: FC<CardProps> = ({ description, id, image, name, inFavs }) => {
       <Description>
         <h2>{name}</h2>
         <p>{description}</p>
-        <CardControls inFavs={inFavs} itemId={id} />
+        <CardControls inFavs={inFavs} item={{ id, name, description }} />
       </Description>
     </StyledCard>
   );

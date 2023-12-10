@@ -1,15 +1,16 @@
 import { useQuery } from "@apollo/client";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { GET_ALL_ROCKETS } from "../API/rocketsAPI";
 import styled from "styled-components";
 import MainSlider from "../components/MainSlider/MainSlider";
-import Slider from "../UI/Slider";
 import Card from "../components/card/Card";
-import Loader from "../UI/Loader";
-import { images } from "../helpers/images";
+import { getCardImage } from "../helpers/images";
 import { RocketType } from "../types/rockets";
+import Carousel from "../UI/carousel/Carousel";
 
-const CardSection = styled.div``;
+const CardSection = styled.div`
+  padding: 4rem 3rem;
+`;
 
 const MainPage: FC = () => {
   const { loading, data } = useQuery(GET_ALL_ROCKETS) as {
@@ -17,20 +18,19 @@ const MainPage: FC = () => {
     data: { rockets: RocketType[] };
   };
 
+  const tours = useRef(null);
+
   return (
     <div>
-      <MainSlider />
-      <CardSection>
-        <h2>popular tours</h2>
-        {data ? (
-          <Slider >
-            {data.rockets.map((el, index) => (
-              <Card {...el} key={index} image={images[0]} />
-            ))}
-          </Slider>
-        ) : loading ? (
-          <Loader />
-        ) : null}
+      <MainSlider tours={tours} />
+      <CardSection ref={tours}>
+        <Carousel
+          items={data?.rockets?.map((el, index) => (
+            <Card {...el} key={index} image={getCardImage(index)} />
+          ))}
+          title="popular tours"
+          isLoading={loading}
+        />
       </CardSection>
     </div>
   );

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Navigation from "../navigation/Navigation";
 import Button from "../../UI/Button";
 import { Icons } from "../../UI/Icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -17,22 +17,28 @@ const StyledHeader = styled.header`
   z-index: 1;
 `;
 
-const ControlItems = styled.div`
+const ControlItems = styled.aside`
   display: flex;
   gap: 12px;
 `;
 
 const Header: FC = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const heartLink = pathname.endsWith("favorites") ? ["#DD377D", "white"] : [];
+
   return (
     <StyledHeader>
       <Logo />
       <Navigation />
       <ControlItems>
-        <Button handleClick={() => navigate("/favorites")}>
-          <Icons.heart />
+        <Button
+          handleClick={() => navigate("/favorites")}
+          background={heartLink[0]}
+        >
+          <Icons.heart fill={heartLink[1]} />
         </Button>
-        <Button color="primary" handleClick={() => navigate("/")}>
+        <Button color="primary" handleClick={() => {}}>
           Sign in
         </Button>
       </ControlItems>

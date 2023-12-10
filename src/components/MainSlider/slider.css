@@ -5,6 +5,7 @@
     font-size: xx-large !important;
     font-weight: 800;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 210px;
@@ -13,6 +14,10 @@
     top: 0;
     left: 0;
     right: 0;
-    margin-left: none;
+    margin-left: unset;
     border-radius: 0;
+}
+
+.bigText {
+    font-size: 320px;
 }

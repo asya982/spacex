@@ -4,3 +4,10 @@ import third from "../assets/rockets/3.png";
 
 export const images = [first, second, third];
 
+export const getCardImage = (index: number):string => {
+  if (index < 3) {
+    return images[index];
+  } else {
+    return getCardImage(index - 3);
+  }
+};

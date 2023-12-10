@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {RouterProvider } from 'react-router-dom'
-import { routes } from './lib/router/router.tsx'
+import { routes } from './lib/router'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
